@@ -14,15 +14,6 @@ sense.clear()
 # rollDie class used to call
 # The electronicDie file and the roll method.
 
-class rollDie:
-    def __init__(self, roll):
-        # Declare Variables
-        self.roll = electronicDie.roll()
-
-    def getRoll(self):
-        return self.roll
-
-
 class game:
     def playerRoll(self, player, score):
         sense.show_message("Your turn,")
@@ -101,8 +92,6 @@ class main():
     def __init__(self):
         run_game = game()
         run_game.playGame()
-        # self.rollDie = rollDie
-        # self.roll = self.rollDie.getRoll
 
         # Write CSV variables
         self.__writeCSV = None
