@@ -24,7 +24,7 @@ class WriteCSV():
     def firstTime(self):
         with open("winner.csv", "w", newline="") as csvfile:
             self.writer = csv.writer(csvfile)
-            self.writer.writerow(["Player 1 Score", "Player 2 Score"])
+            self.writer.writerow(["Winner Score", "Loser Score"])
             csvfile.close()
 
     # Write contents to the CSV file with the append option, to not overwrite.
@@ -70,8 +70,8 @@ class game:
         # And appending the report.
         self._p1score = self.p1score
         self._p2score = self.p2score
-        self.__writeCSV = None
-        self.__firstTime = True
+        self.writeCSV = None
+        self.firstTime = True
 
         while self.p1score < 30 and self.p2score < 30:
             self.p1score = self.playerRoll(player1, self.p1score)
@@ -80,11 +80,11 @@ class game:
                 sense.clear()
                 
                 # Write contents to winner.CSV
-                self.__writeCSV = WriteCSV(self._p1score, self._p2score)
-                if (self.__firstTime):
-                    self.__writeCSV.firstTime()
-                    self.__firstTime = False
-                self.__writeCSV.write()
+                self.writeCSV = WriteCSV(self.p1score, self.p2score)
+                if (self.firstTime):
+                    self.writeCSV.firstTime()
+                    self.firstTime = False
+                self.writeCSV.write()
                 sys.exit()
             else:
                 self.p2score = self.playerRoll(player2, self.p2score)
@@ -92,12 +92,12 @@ class game:
                     sense.show_message("Player 2 wins!")
                     sense.clear()
 
-                    # Write contents to winner.csv
-                    self.__writeCSV = WriteCSV(self._p1score, self.p2score)
-                    if (self.__firstTime):
-                        self.__writeCSV.firstTime()
-                        self.__firstTime = False
-                    self.__writeCSV.write()
+                    # Write contents to winner.csv 
+                    self.writeCSV = WriteCSV(self.p1score, self.p2score)
+                    if (self.firstTime):
+                        self.writeCSV.firstTime()
+                        self.firstTime = False
+                    self.writeCSV.write()
                     sys.exit()
 
 # The main class is used to control the program,
