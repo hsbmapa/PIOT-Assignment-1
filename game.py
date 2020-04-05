@@ -28,7 +28,7 @@ class WriteCSV:
     def first_time(self):
         with open("winner.csv", "w", newline="") as csvfile:
             self.writer = csv.writer(csvfile)
-            self.writer.writerow(["Date", "Player", "Winner Score"])
+            self.writer.writerow(["Date", "Winner", "Winner Score"])
             csvfile.close()
 
     # Write contents to the CSV file with the append option, to not overwrite.
