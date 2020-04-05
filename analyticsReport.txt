@@ -1,0 +1,14 @@
+animatedEmoji.py:
+Displays 3 emoji faces with colours such as Green, Brown, White and Gray.
+While loop sets the pixels of each emoji for them to display.
+
+monitorAndDisplay.py:
+Uses the Json file to read the temperature limits and lets the sense hat create a message
+
+electronicDie.py:
+Shows the pixels of the die using the sense hat and returns the value to be used in the game.py
+
+game.py:
+Is a game between 2 players where first one to reach 30 or over wins the game. Players shake the pi for it to 
+print a number between 1 - 6. with frequent text scrolling. At the end of the game the program prints out a CSV file
+with the date, player name and winner score.
