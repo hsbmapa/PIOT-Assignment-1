@@ -4,6 +4,7 @@ import electronicDie
 import time
 import csv
 import sys
+import datetime
 
 sense = SenseHat()
 
@@ -15,23 +16,24 @@ sense.clear()
 # By the user.
 
 class WriteCSV():
-    def __init__(self, p1score, p2score):
+    def __init__(self, p1score, p2score, date):
         # Declare Variables
         self._p1score = p1score
         self._p2score = p2score
+        self._date = date
 
     # If it's the first time, create a file with the write option.
     def firstTime(self):
         with open("winner.csv", "w", newline="") as csvfile:
             self.writer = csv.writer(csvfile)
-            self.writer.writerow(["Winner Score", "Loser Score"])
+            self.writer.writerow(["Date", "Winner Score", "Loser Score"])
             csvfile.close()
 
     # Write contents to the CSV file with the append option, to not overwrite.
     def write(self):
         with open("winner.csv", "a", newline="") as csvfile:
             self.writer = csv.writer(csvfile)
-            self.writer.writerow([str(self._p1score), str(self._p2score)])
+            self.writer.writerow([str(self._p1score), str(self._p2score), self._date])
             csvfile.close()
 
 class game:
@@ -65,11 +67,13 @@ class game:
         self.p2score = 0
         player1 = "P1"
         player2 = "P2"
+        self.date = datetime.datetime.now()
 
         # Writing the CSV variables for creating
         # And appending the report.
         self._p1score = self.p1score
         self._p2score = self.p2score
+        self._date = self.date
         self.writeCSV = None
         self.firstTime = True
 
@@ -80,7 +84,7 @@ class game:
                 sense.clear()
                 
                 # Write contents to winner.CSV
-                self.writeCSV = WriteCSV(self.p1score, self.p2score)
+                self.writeCSV = WriteCSV(self.date, self.p1score, self.p2score)
                 if (self.firstTime):
                     self.writeCSV.firstTime()
                     self.firstTime = False
@@ -93,7 +97,7 @@ class game:
                     sense.clear()
 
                     # Write contents to winner.csv 
-                    self.writeCSV = WriteCSV(self.p1score, self.p2score)
+                    self.writeCSV = WriteCSV(self.date, self.p1score, self.p2score)
                     if (self.firstTime):
                         self.writeCSV.firstTime()
                         self.firstTime = False
