@@ -40,7 +40,9 @@ class WriteCSV:
 
 
 class Game:
+
     def player_roll(self, player, score):
+        PI_MOVEMENT = 1.5
         sense.show_message("Your turn,")
         sense.show_message(str(player))
         game_roll = False
@@ -51,7 +53,7 @@ class Game:
             y = abs(y)
             z = abs(z)
 
-            if x > 1.5 or y > 1.5 or z > 1.5:
+            if x > PI_MOVEMENT or y > PI_MOVEMENT or z > PI_MOVEMENT:
                 roll_score = electronicDie.roll()
                 time.sleep(2)
                 sense.clear()
@@ -66,6 +68,7 @@ class Game:
         return cumulative_score
 
     def play_game(self):
+        MAX_SCORE = 30
         self.date = datetime.datetime.now().strftime('%d-%m-%Y %H:%M')
         self.p1score = 0
         self.p2score = 0
@@ -82,9 +85,9 @@ class Game:
         self.writeCSV = None
         my_file = Path("winner.csv")
 
-        while self.p1score < 30 and self.p2score < 30:
+        while self.p1score < MAX_SCORE and self.p2score < MAX_SCORE:
             self.p1score = self.player_roll(player1, self.p1score)
-            if self.p1score >= 30:
+            if self.p1score >= MAX_SCORE:
                 sense.show_message("Player 1 wins!")
                 self.player = player1
                 self.winner_score = self.p1score
@@ -98,7 +101,7 @@ class Game:
                 sys.exit()
             else:
                 self.p2score = self.player_roll(player2, self.p2score)
-                if self.p2score >= 30:
+                if self.p2score >= MAX_SCORE:
                     sense.show_message("Player 2 wins!")
                     self.player = player2
                     self.winner_score = self.p2score
