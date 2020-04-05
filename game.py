@@ -9,7 +9,7 @@ import datetime
 
 sense = SenseHat()
 
-# sense.show_message("Welcome. Shake pi. First to 30 wins. Good luck!")
+sense.show_message("Welcome. Shake PI to roll the dice. First to 30 wins. Good luck!")
 sense.clear()
 
 
@@ -82,9 +82,9 @@ class Game:
         self.writeCSV = None
         my_file = Path("winner.csv")
 
-        while self.p1score < 6 and self.p2score < 6:
+        while self.p1score < 30 and self.p2score < 30:
             self.p1score = self.player_roll(player1, self.p1score)
-            if self.p1score >= 6:
+            if self.p1score >= 30:
                 sense.show_message("Player 1 wins!")
                 self.player = player1
                 self.winner_score = self.p1score
@@ -98,7 +98,7 @@ class Game:
                 sys.exit()
             else:
                 self.p2score = self.player_roll(player2, self.p2score)
-                if self.p2score >= 6:
+                if self.p2score >= 30:
                     sense.show_message("Player 2 wins!")
                     self.player = player2
                     self.winner_score = self.p2score
